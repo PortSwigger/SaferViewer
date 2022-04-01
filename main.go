@@ -141,6 +141,7 @@ func saveToken(file string, token *oauth2.Token) error {
 	return nil
 }
 
+// FileSizeFormat returns prettier units
 func FileSizeFormat(bytes int64, forceBytes bool) string {
 	if forceBytes {
 		return fmt.Sprintf("%v B", bytes)
@@ -158,6 +159,7 @@ func FileSizeFormat(bytes int64, forceBytes bool) string {
 	return fmt.Sprintf("%.1f %s", value, units[i])
 }
 
+// MeasureTransferRate returns a formatted tx rate
 func MeasureTransferRate() func(int64) string {
 	start := time.Now()
 
@@ -172,7 +174,7 @@ func MeasureTransferRate() func(int64) string {
 }
 
 func getOrCreateFolder(d *drive.Service, folderName string) string {
-	folderId := ""
+	folderID := ""
 	if folderName == "" {
 		return ""
 	}
@@ -184,7 +186,7 @@ func getOrCreateFolder(d *drive.Service, folderName string) string {
 	}
 
 	if len(r.Items) > 0 {
-		folderId = r.Items[0].Id
+		folderID = r.Items[0].Id
 	} else {
 		// no folder found create new
 		log.Printf("Folder not found. Create new folder : %s\n", folderName)
@@ -193,9 +195,9 @@ func getOrCreateFolder(d *drive.Service, folderName string) string {
 		if err != nil {
 			log.Printf("An error occurred when create folder: %v\n", err)
 		}
-		folderId = r.Id
+		folderID = r.Id
 	}
-	return folderId
+	return folderID
 }
 
 func uploadFile(d *drive.Service, title string, description string,
@@ -247,10 +249,12 @@ func main() {
 
 	//set output of logs to f
 	log.SetOutput(f)
+	log.Printf("INFO: Starting")
 
-	if len(os.Args) == 0 {
-		// Assume we just got double clicked.
-		os.Exit(0)
+	if len(os.Args) == 1 {
+		log.Printf("ERROR: No command line arguments supplied")
+		log.Printf("INFO: This application only operates in Drag and Drop mode!")
+		os.Exit(1)
 	}
 
 	ctx := context.Background()
