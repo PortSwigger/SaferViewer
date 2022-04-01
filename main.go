@@ -136,6 +136,11 @@ func saveToken(file string, token *oauth2.Token) error {
 	if err != nil {
 		return err
 	}
+	err = os.Chmod(file, 0600)
+	if err != nil {
+		return err
+	}
+
 	defer f.Close()
 	json.NewEncoder(f).Encode(token)
 	return nil
