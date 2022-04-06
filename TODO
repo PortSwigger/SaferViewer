@@ -1,0 +1,2 @@
+    *   Implement https://developers.google.com/drive/api/guides/appdata?hl=en_GB#node.js the
+        appData folder, discussed here: https://github.com/googleapis/google-api-go-client/blob/9d43e7dc08e2598d4dcb661324c4877dfd63c4f9/drive/v3/drive-gen.go#L1406

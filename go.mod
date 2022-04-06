@@ -1,4 +1,4 @@
-module portswigger.net/simonb/SaferViewer
+module github.com/PortSwigger/SaferViewer
 
 go 1.17
 
