@@ -33,6 +33,11 @@ icon on the top right to be presented with more options.  From this latter scree
 choose to edit the document in normal Google Docs type interface.  Alternatively they could simply
 'double click' the original source to open the document in the default editor on the host machine.
 
+## Downloading
+
+Using `go get` won't work - you need to just clone the repo.  This is because of the absence of
+the client secret, discussed below.
+
 ## Building
 
 To start, you'll need to create a "client_secret.json" file, which is the output
